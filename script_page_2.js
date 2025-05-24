@@ -64,3 +64,16 @@ document.getElementById('show-login').onclick = function(e) {
   document.getElementById('loginForm').style.display = 'block';
   document.getElementById('form-title').textContent = 'Login';
 };
+
+window.addEventListener('DOMContentLoaded', function() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('show') === 'signup') {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('signupForm').style.display = 'block';
+    document.getElementById('form-title').textContent = 'Sign Up';
+  } else {
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('form-title').textContent = 'Login';
+  }
+});
