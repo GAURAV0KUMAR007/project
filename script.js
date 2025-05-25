@@ -124,5 +124,17 @@ document.addEventListener("DOMContentLoaded", function () {
       };
     });
   }
+
+  document.getElementById('show-login').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('signupForm').style.display = 'none';
+  });
+
+  document.getElementById('show-signup').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('signupForm').style.display = 'block';
+    document.getElementById('loginForm').style.display = 'none';
+  });
 });
 
