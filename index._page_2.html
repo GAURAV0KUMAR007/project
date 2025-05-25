@@ -31,7 +31,7 @@
             <input type="text" id="signup-name" placeholder="Enter your name" required>
 
             <label for="signup-email">Email</label>
-            <input type="email" id="signup-email" placeholder="Enter your email" required>
+            <input type="text" id="signup-email" placeholder="Enter your email" required>
             
             <label for="signup-password">Password</label>
             <input type="password" id="signup-password" placeholder="Create a password" required>
@@ -46,11 +46,19 @@
 </body>
 <script src="script_page_2.js"></script>
 <script>
+fetch('http://localhost:3000/getAllUsers')
+  .then(res => res.json())
+  .then(data => {
+    console.log("All users:", data);
+  })
+  .catch(err => console.error("Error fetching users:", err));
+</script>
+<!-- <script>
 fetch('http://localhost:3000/ping')
   .then(res => res.json())
   .then(data => {
     alert(data.message); // Agar server sahi hai to "Server is working!" alert aayega
   })
   .catch(() => alert("Server se connect nahi ho pa raha!"));
-</script>
+</script> -->
 </html>
