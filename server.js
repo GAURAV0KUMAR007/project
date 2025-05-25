@@ -78,20 +78,6 @@ app.post('/signup', async (req, res) => {
   }
 });
 
-// Show/Hide Forms
-document.getElementById('show-signup').onclick = function(e) {
-  e.preventDefault();
-  document.getElementById('loginForm').style.display = 'none';
-  document.getElementById('signupForm').style.display = 'block';
-  document.getElementById('form-title').textContent = 'Sign Up';
-};
-document.getElementById('show-login').onclick = function(e) {
-  e.preventDefault();
-  document.getElementById('signupForm').style.display = 'none';
-  document.getElementById('loginForm').style.display = 'block';
-  document.getElementById('form-title').textContent = 'Login';
-};
-
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000');
 });

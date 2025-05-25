@@ -51,19 +51,19 @@ document.getElementById('signupForm').addEventListener('submit', function(e) {
   .catch(() => alert('Server se connect nahi ho pa raha!'));
 });
 
-// Show/Hide Forms
-document.getElementById('show-signup').onclick = function(e) {
-  e.preventDefault();
-  document.getElementById('loginForm').style.display = 'none';
-  document.getElementById('signupForm').style.display = 'block';
-  document.getElementById('form-title').textContent = 'Sign Up';
-};
-document.getElementById('show-login').onclick = function(e) {
-  e.preventDefault();
-  document.getElementById('signupForm').style.display = 'none';
-  document.getElementById('loginForm').style.display = 'block';
-  document.getElementById('form-title').textContent = 'Login';
-};
+// // Show/Hide Forms
+// document.getElementById('show-signup').onclick = function(e) {
+//   e.preventDefault();
+//   document.getElementById('loginForm').style.display = 'none';
+//   document.getElementById('signupForm').style.display = 'block';
+//   document.getElementById('form-title').textContent = 'Sign Up';
+// };
+// document.getElementById('show-login').onclick = function(e) {
+//   e.preventDefault();
+//   document.getElementById('signupForm').style.display = 'none';
+//   document.getElementById('loginForm').style.display = 'block';
+//   document.getElementById('form-title').textContent = 'Login';
+// };
 
 window.addEventListener('DOMContentLoaded', function() {
   const params = new URLSearchParams(window.location.search);
