@@ -355,6 +355,15 @@ a:hover {
   font-size: 1.05em;
 }
 
+/* Add this to your CSS */
+.no-hover,
+.no-hover:hover {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.6;
+  background:linear-gradient(90deg, #7d2cff 0%, #39ff14 100%) !important;
+  color: #fff !important;
+}
 
 #resend-link:hover {
   color: red;

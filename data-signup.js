@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // --- TESTING: Show congratulations popup manually ---
-    popupOverlay.style.display = 'flex'; // <-- Remove or comment out after testing
-    startBalloons(); // <-- Remove or comment out after testing
+    // popupOverlay.style.display = 'flex'; // <-- Remove or comment out after testing
+    // startBalloons(); // <-- Remove or comment out after testing
     // ---------------------------------------------------
 });

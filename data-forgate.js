@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const resendLink = document.getElementById('resend-link');
     const otpSection = document.getElementById('otp-section');
     const otpInput = document.getElementById('otp-input');
+    const otpSendBtn = forgotForm.querySelector('button[type="submit"]');
 
     forgotForm.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -19,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
             errorMessage.textContent = 'Reset link sent successfully to your email!';
             resendLink.style.display = 'block';
             otpSection.style.display = 'block';
+            otpSendBtn.disabled = true;
+            otpSendBtn.classList.add('no-hover');
         } else {
             errorMessage.style.color = 'red';
             errorMessage.textContent = 'This email is not registered!';
@@ -27,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Yeh dono event listeners form submit ke bahar likhein:
     otpInput.addEventListener('input', function(e) {
         this.value = this.value.replace(/[^0-9]/g, '').slice(0,6);
     });
@@ -35,5 +37,11 @@ document.addEventListener('DOMContentLoaded', function () {
     resendLink.onclick = function() {
         errorMessage.style.color = 'red';
         errorMessage.textContent = 'Reset link resent to your email!';
+    };
+
+    document.getElementById('verify-otp-btn').onclick = function() {
+        // Yahan aap OTP verify kar sakte hain (agar logic hai)
+        // OTP sahi ho to redirect:
+        window.location.href = 'reset-password.html';
     };
 });
