@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const balloon = document.createElement('img');
             balloon.src = `src/${color}.png`;
             balloon.className = 'floating-balloon';
-            balloon.style.left = Math.random() * 100 + '%';
+            balloon.style.left = Math.random() * 75 + '%';
             balloon.style.width = '43px';
             balloon.style.height = '62px';
             balloon.style.position = 'absolute';
