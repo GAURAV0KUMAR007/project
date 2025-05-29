@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Rock Paper Scissors</title>
+    <link rel="stylesheet" href="data-signup.css">
+</head>
+<body>
+    <div class="container">
+      <div class="main-image">
+        <img src="src/cropped_img_roll.png" alt="top" />
+        <img src="src/dog-removebg-preview.png" alt="0" />
+        <img src="src/cropped_img_roll.png" alt="bottom">
+      </div>
+      <form id="signupForm">
+        <h2 id="form-title">Sign Up</h2>
+
+        <label for="signup-username">Username</label>
+        <input type="text" id="signup-username" placeholder="Choose a username" required />
+        <div class="error-message" id="username-error"></div>
+
+        <label for="signup-name">Name</label>
+        <input type="text" id="signup-name" placeholder="Enter your name" required />
+        <div class="error-message" id="name-error"></div>
+
+        <label for="signup-email">Email</label>
+        <input type="text" id="signup-email" placeholder="Enter your email" required />
+        <div class="error-message" id="email-error"></div>
+
+        <label for="signup-password">Password</label>
+        <input type="password" id="signup-password" placeholder="Create a password" required />
+        <div class="error-message" id="password-error"></div>
+
+        <button type="submit">Sign Up</button>
+        
+        <div class="form-footer">
+          Already have an account?
+          <a href="index.html" id="show-login">Login</a>
+        </div>
+      </form>
+    </div>
+
+    <div id="popup-overlay" style="display:none;">
+      <div id="popup-box">
+        <span id="close-popup">&times;</span>
+        <div id="congrats-message">
+          <h2>Congratulations!</h2>
+          <p>Welcome to the Rock Paper Scissors game!</p>
+          <img src="src/done.png" alt="done" />
+          <p>You have successfully signed up!</p>
+          <button id="continue-button">Continue</button>
+        </div>
+        <div id="balloon-container">
+          <img src="src/red.png" alt="red">
+          <img src="src/pink.png" alt="pink">
+          <img src="src/green.png" alt="green">
+          <img src="src/yellow.png" alt="yellow">
+          <img src="src/golden.png" alt="golden">
+        </div>
+      </div>
+    </div>
+    <script src="data-signup.js"></script>
+</body>
+</html>
