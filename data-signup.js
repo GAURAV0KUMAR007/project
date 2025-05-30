@@ -87,14 +87,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (hasError) return;
 
-        // Save new user
-        users.push({ username, name, email, password });
-        localStorage.setItem('users', JSON.stringify(users));
-
-        // Show popup and start balloons
-        popupOverlay.style.display = 'flex';
-        signupForm.reset();
-        startBalloons();
+        // Signup data backend ko bhejein
+        fetch('http://localhost:3000/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, name, email, password })
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+            if (data.message === 'Signup successful') {
+                // Success ke baad form reset ya popup dikha sakte hain
+                signupForm.reset();
+                // popupOverlay.style.display = 'flex';
+                // startBalloons();
+            }
+        })
+        .catch(err => {
+            alert('Server error: ' + err.message);
+        });
     });
 
     // Hide popup on close

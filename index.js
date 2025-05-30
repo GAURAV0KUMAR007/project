@@ -1,29 +1,57 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const loginForm = document.getElementById('login-form');
-    const usernameInput = document.getElementById('login-username');
+    const loginForm = document.getElementById('loginForm');
+    const usernameInput = document.getElementById('login-email');
     const passwordInput = document.getElementById('login-password');
-    const errorDiv = document.getElementById('login-error');
+    const usernameErrorDiv = document.getElementById('login-error');
+    const passwordErrorDiv = document.getElementById('password-error');
+
+    // Error clear on input
+    usernameInput.addEventListener('input', function () {
+        usernameErrorDiv.textContent = '';
+    });
+    passwordInput.addEventListener('input', function () {
+        passwordErrorDiv.textContent = '';
+    });
 
     loginForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        errorDiv.textContent = '';
+        usernameErrorDiv.textContent = '';
+        passwordErrorDiv.textContent = '';
 
         const usernameOrEmail = usernameInput.value.trim();
         const password = passwordInput.value;
 
-        // Get users from localStorage
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        const user = users.find(u =>
-            (u.username === usernameOrEmail || u.email === usernameOrEmail) &&
-            u.password === password
-        );
+        fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ usernameOrEmail, password })
+        })
+        .then(res => res.json())
+        .then(data => {
+            // Clear previous errors
+            usernameErrorDiv.textContent = '';
+            passwordErrorDiv.textContent = '';
 
-        if (user) {
-            // Login success - redirect or show success
-            window.location.href = "data-page.html"; // ya jo bhi page ho
-        } else {
-            errorDiv.textContent = "Invalid username/email or password!";
-            errorDiv.style.color = "red";
-        }
+            if (data.message === 'Login successful') {
+                window.location.href = "data-page.html";
+            } 
+            if (data.usernameError) {
+                usernameErrorDiv.textContent = data.usernameError;
+                usernameErrorDiv.style.color = "red";
+            }
+            if (data.passwordError) {
+                passwordErrorDiv.textContent = data.passwordError;
+                passwordErrorDiv.style.color = "red";
+            }
+            // fallback for any other error
+            if (!data.usernameError && !data.passwordError && data.message && data.message !== 'Login successful') {
+                usernameErrorDiv.textContent = data.message;
+                usernameErrorDiv.style.color = "red";
+            }
+        })
+        .catch(err => {
+            usernameErrorDiv.textContent = "Server error: " + err.message;
+            usernameErrorDiv.style.color = "red";
+        });
     });
 });
