@@ -1,9 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     const signupForm = document.getElementById('signupForm');
     const popupOverlay = document.getElementById('popup-overlay');
-    const closePopup = document.getElementById('close-popup');
     const continueBtn = document.getElementById('continue-button');
     const balloonContainer = document.getElementById('balloon-container');
+
+    if (!signupForm || !popupOverlay || !continueBtn || !balloonContainer) {
+        console.error('Some elements are missing in HTML!');
+        return;
+    }
 
     let balloonInterval;
 
@@ -13,21 +17,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const color = colors[Math.floor(Math.random() * colors.length)];
             const balloon = document.createElement('img');
             balloon.src = `src/${color}.png`;
-            balloon.className = 'floating-balloon';
             balloon.style.left = Math.random() * 75 + '%';
-            balloon.style.width = '43px';
-            balloon.style.height = '62px';
-            balloon.style.position = 'absolute';
-            balloon.style.bottom = '0';
-            balloon.style.zIndex = '1001';
-            balloon.style.pointerEvents = 'none';
             balloonContainer.appendChild(balloon);
-
-            // Remove balloon after animation
-            balloon.addEventListener('animationend', () => {
-                balloon.remove();
-            });
-        }, 250); // New balloon every 250ms
+            balloon.addEventListener('animationend', () => balloon.remove());
+        }, 250);
     }
 
     function stopBalloons() {
@@ -42,11 +35,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const usernameError = document.getElementById('username-error');
         const emailError = document.getElementById('email-error');
         const passwordError = document.getElementById('password-error');
+        const nameError = document.getElementById('name-error');
 
         // Clear previous errors
         usernameError.textContent = '';
         emailError.textContent = '';
         passwordError.textContent = '';
+        nameError.textContent = '';
 
         const username = document.getElementById('signup-username').value.trim();
         const name = document.getElementById('signup-name').value.trim();
@@ -85,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
             hasError = true;
         }
 
-        if (hasError) return;
+        if (hasError) return; // Agar koi error hai to popup nahi dikhana
 
         // Signup data backend ko bhejein
         fetch('http://localhost:3000/signup', {
@@ -95,12 +90,15 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(res => res.json())
         .then(data => {
-            alert(data.message);
             if (data.message === 'Signup successful') {
-                // Success ke baad form reset ya popup dikha sakte hain
                 signupForm.reset();
-                // popupOverlay.style.display = 'flex';
-                // startBalloons();
+                setTimeout(() => {
+                    popupOverlay.style.display = 'flex'; // Yahi par popup dikhana hai
+                    startBalloons();
+                }, 500);
+            } else {
+                // Agar koi aur message aaye to popup mat dikhana
+                // Error message show kar sakte hain
             }
         })
         .catch(err => {
@@ -108,25 +106,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Hide popup on close
-    closePopup.onclick = function() {
-        popupOverlay.style.display = 'none';
-        stopBalloons();
-    };
-
-    // Continue button redirects to index.html
     continueBtn.onclick = function() {
         stopBalloons();
         window.location.href = 'index.html';
     };
-
-    // Close popup when clicking outside of it
-    popupOverlay.addEventListener('click', function (e) {
-        if (e.target === popupOverlay) {
-            popupOverlay.style.display = 'none';
-            stopBalloons();
-        }
-    });
 
     // Error clear on input
     document.getElementById('signup-username').addEventListener('input', function() {
@@ -138,9 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('signup-password').addEventListener('input', function() {
         document.getElementById('password-error').textContent = '';
     });
-
-    // --- TESTING: Show congratulations popup manually ---
-    // popupOverlay.style.display = 'flex'; // <-- Remove or comment out after testing
-    // startBalloons(); // <-- Remove or comment out after testing
-    // ---------------------------------------------------
+    document.getElementById('signup-name').addEventListener('input', function() {
+        document.getElementById('name-error').textContent = '';
+    });
 });

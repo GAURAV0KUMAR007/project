@@ -353,9 +353,10 @@ a:hover {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 2000;
-  display: flex;
-  align-items: center;
+  display: none; /* Default hidden */
   justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
 }
 
 #popup-box {
@@ -388,7 +389,6 @@ a:hover {
   color: #ff4081;
   text-align: center;
   z-index: 1000;
-  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
